@@ -13,8 +13,8 @@ describe("calculateTotal", () => {
       { price: 50, quantity: 4 },
     ];
     const result = calculateTotal(items);
-    // expect(result).to.equal(100 * 2 + 200 * 1 + 50 * 4); // 100*2 + 200*1 + 50*4 = 600, code pass
-    expect(result).to.equal(100 + 200 * 1 + 50 * 4); // code fail, dùng để kiểm thử
+    expect(result).to.equal(100 * 2 + 200 * 1 + 50 * 4); // 100*2 + 200*1 + 50*4 = 600, code pass
+    // expect(result).to.equal(100 + 200 * 1 + 50 * 4); // code fail, dùng để kiểm thử
   });
 
   // Kiểm thử khi mảng rỗng
