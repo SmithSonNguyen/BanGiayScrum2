@@ -43,7 +43,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying application...'
-                // Các lệnh deploy của bạn
+                // Các lệnh deploy của bạn.
             }
         }
     }
