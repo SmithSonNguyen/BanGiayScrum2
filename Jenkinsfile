@@ -17,8 +17,9 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/SmithSonNguyen/BanGiayScrum2.git'
                 // Trích xuất Redmine Issue ID từ commit message
                 script {
-                    // Use correct --format string and handle Windows escaping
+                    // Use --pretty with correct format
                     def commitMessage = bat(script: 'git log -1 --pretty=%s%n%b', returnStdout: true).trim()
+                    echo "Commit message: ${commitMessage}" // Debugging output
                     def issueIdMatcher = commitMessage =~ /#(\d+)/
                     if (issueIdMatcher) {
                         env.REDMINE_ISSUE_ID = issueIdMatcher[0][1]
