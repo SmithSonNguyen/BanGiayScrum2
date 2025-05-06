@@ -2,7 +2,7 @@
 
 const chai = require("chai");
 const expect = chai.expect;
-const calculateTotal = require("./app"); // Import hàm tính tổng từ app.js
+const calculateTotal = require("./fn_tinhtien"); // Import hàm tính tổng từ app.js
 
 describe("calculateTotal", () => {
   // Kiểm thử hàm tính tổng khi có các sản phẩm hợp lệ
