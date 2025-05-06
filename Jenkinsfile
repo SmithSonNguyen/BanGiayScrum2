@@ -72,4 +72,5 @@ pipeline {
     }
     //test commit Jenkins 1
     //test commit Jenkins 2 tự build, ko bấm Build now
+    //test commit Jenkins 3 tự build, ko bấm Build now
 }
