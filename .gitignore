@@ -1,0 +1,10 @@
+# Bỏ qua thư mục node_modules
+node_modules/
+
+
+# Bỏ qua file log
+*.log
+
+# Bỏ qua các tệp cấu hình của hệ điều hành
+.DS_Store
+Thumbs.db
