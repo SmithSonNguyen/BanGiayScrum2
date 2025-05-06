@@ -15,6 +15,17 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 git branch: 'main', url: 'https://github.com/SmithSonNguyen/BanGiayScrum2.git'
+                // Trích xuất Redmine Issue ID từ commit message
+                script {
+                    def commitMessage = sh(script: 'git log -1 --pretty=%B', returnStdout: true).trim()
+                    def issueIdMatcher = commitMessage =~ /#(\d+)/
+                    if (issueIdMatcher) {
+                        env.REDMINE_ISSUE_ID = issueIdMatcher[0][1]
+                        echo "Tìm thấy Issue ID: ${env.REDMINE_ISSUE_ID}"
+                    } else {
+                        echo "Không tìm thấy Issue ID trong commit message."
+                    }
+                }
             }
         }
 
