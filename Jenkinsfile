@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        // của tester
         REDMINE_API_KEY = '8e208768af1531a000a38f6d070145e9c6f3b5af'
         REDMINE_BASE_URL = 'http://localhost:3000' // Thay bằng URL Redmine Docker của bạn
     }
@@ -15,7 +14,6 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 git branch: 'main', url: 'https://github.com/SmithSonNguyen/BanGiayScrum2.git'
-                // Trích xuất Redmine Issue ID từ commit message
                 script {
                     def commitMessage = bat(script: 'git log -1 --pretty="format:^%%s^%%n^%%b"', returnStdout: true).trim()
                     def issueIdMatcher = commitMessage =~ /#(\d+)/
@@ -31,17 +29,13 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                script {
-                    bat 'npm install'
-                }
+                bat 'npm install'
             }
         }
 
         stage('Run Tests') {
             steps {
-                script {
-                    bat 'npm test'
-                }
+                bat 'npm test'
             }
         }
 
@@ -57,39 +51,53 @@ pipeline {
         always {
             echo 'Pipeline has finished.'
         }
+
         success {
             echo 'Build and test passed!'
             mail to: '22110416@student.hcmute.edu.vn',
-                 cc: '',
-                 bcc: '',
                  subject: 'Thông báo kết quả Build',
                  body: 'Chúc mừng! Build thành công.'
-            // Cập nhật trạng thái Redmine issue sang "Resolved" (ID: 3)
+
             script {
                 if (env.REDMINE_ISSUE_ID) {
-                    redmineSetIssueStatus credentialsId: '', // Không cần credentialsId nếu đã cấu hình API Key global
-                                          redmineUrl: "${env.REDMINE_BASE_URL}",
-                                          issueId: "${env.REDMINE_ISSUE_ID}",
-                                          statusId: '3'
+                    httpRequest customHeaders: [[name: 'X-Redmine-API-Key', value: "${env.REDMINE_API_KEY}"]],
+                        httpMode: 'PUT',
+                        url: "${env.REDMINE_BASE_URL}/issues/${env.REDMINE_ISSUE_ID}.json",
+                        contentType: 'APPLICATION_JSON',
+                        requestBody: """
+                        {
+                            "issue": {
+                                "status_id": 3
+                            }
+                        }
+                        """
+                    echo "Đã cập nhật trạng thái issue ${env.REDMINE_ISSUE_ID} sang 'Resolved'."
                 } else {
                     echo 'Không có REDMINE_ISSUE_ID để cập nhật trạng thái Resolved.'
                 }
             }
         }
+
         failure {
             echo 'Test failed!'
             mail to: '22110416@student.hcmute.edu.vn',
-                 cc: '',
-                 bcc: '',
                  subject: 'Thông báo kết quả Build',
                  body: 'Rất tiếc! Build không thành công.'
-            // Cập nhật trạng thái Redmine issue sang "Feedback" (Giả sử ID là 4)
+
             script {
                 if (env.REDMINE_ISSUE_ID) {
-                    redmineSetIssueStatus credentialsId: '', // Không cần credentialsId nếu đã cấu hình API Key global
-                                          redmineUrl: "${env.REDMINE_BASE_URL}",
-                                          issueId: "${env.REDMINE_ISSUE_ID}",
-                                          statusId: '4' // Thay bằng ID thực tế của "Feedback"
+                    httpRequest customHeaders: [[name: 'X-Redmine-API-Key', value: "${env.REDMINE_API_KEY}"]],
+                        httpMode: 'PUT',
+                        url: "${env.REDMINE_BASE_URL}/issues/${env.REDMINE_ISSUE_ID}.json",
+                        contentType: 'APPLICATION_JSON',
+                        requestBody: """
+                        {
+                            "issue": {
+                                "status_id": 4
+                            }
+                        }
+                        """
+                    echo "Đã cập nhật trạng thái issue ${env.REDMINE_ISSUE_ID} sang 'Feedback'."
                 } else {
                     echo 'Không có REDMINE_ISSUE_ID để cập nhật trạng thái Feedback.'
                 }
