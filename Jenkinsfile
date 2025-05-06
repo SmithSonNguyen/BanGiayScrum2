@@ -1,35 +1,34 @@
 pipeline {
     agent any
 
+    environment {
+        // của tester
+        REDMINE_API_KEY = '8e208768af1531a000a38f6d070145e9c6f3b5af'
+        REDMINE_BASE_URL = 'http://localhost:3000' // Thay bằng URL Redmine Docker của bạn
+    }
+
     tools {
-        // Cài đặt Node.js
-        nodejs 'NodeJS_Jenkins' // Tên của Node.js installation trong Jenkins
+        nodejs 'NodeJS_Jenkins'
     }
 
     stages {
         stage('Clone Repository') {
             steps {
-                // Clone mã nguồn từ GitHub
                 git branch: 'main', url: 'https://github.com/SmithSonNguyen/BanGiayScrum2.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                // Cài đặt các dependencies từ package.json
                 script {
-                    // Cài đặt Node.js và các package cần thiết
-                    // sh 'npm install'
-                    bat 'npm install' // Sử dụng bat cho Windows, sh cho Linux
+                    bat 'npm install'
                 }
             }
         }
 
         stage('Run Tests') {
             steps {
-                // Chạy test tự động với Mocha
                 script {
-                    // Chạy bài kiểm thử tự động
                     bat 'npm test'
                 }
             }
@@ -37,40 +36,53 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                // Triển khai ứng dụng (Ví dụ: deploy lên server hoặc Docker)
                 echo 'Deploying application...'
-                // Bạn có thể thêm các lệnh deploy ở đây
+                // Các lệnh deploy của bạn
             }
         }
     }
 
     post {
         always {
-            // Các bước sau khi pipeline hoàn thành
             echo 'Pipeline has finished.'
         }
         success {
-            // Thông báo khi thành công
             echo 'Build and test passed!'
-            // Gửi email khi build thành công
             mail to: '22110416@student.hcmute.edu.vn',
-                 cc: '', 
-                 bcc: '', 
-                 subject: 'Thông báo kết quả Build', 
+                 cc: '',
+                 bcc: '',
+                 subject: 'Thông báo kết quả Build',
                  body: 'Chúc mừng! Build thành công.'
+            // Cập nhật trạng thái Redmine issue sang "Resolved" (ID: 3)
+            script {
+                if (env.REDMINE_ISSUE_ID) {
+                    redmineSetIssueStatus credentialsId: '', // Không cần credentialsId nếu đã cấu hình API Key global
+                                          redmineUrl: "${env.REDMINE_BASE_URL}",
+                                          issueId: "${env.REDMINE_ISSUE_ID}",
+                                          statusId: '3'
+                } else {
+                    echo 'Không có REDMINE_ISSUE_ID để cập nhật trạng thái Resolved.'
+                }
+            }
         }
         failure {
-            // Thông báo khi thất bại
             echo 'Test failed!'
-            // Gửi email khi build thất bại
             mail to: '22110416@student.hcmute.edu.vn',
-                 cc: '', 
-                 bcc: '', 
-                 subject: 'Thông báo kết quả Build', 
+                 cc: '',
+                 bcc: '',
+                 subject: 'Thông báo kết quả Build',
                  body: 'Rất tiếc! Build không thành công.'
+            // Cập nhật trạng thái Redmine issue sang "Feedback" (Giả sử ID là 4)
+            script {
+                if (env.REDMINE_ISSUE_ID) {
+                    redmineSetIssueStatus credentialsId: '', // Không cần credentialsId nếu đã cấu hình API Key global
+                                          redmineUrl: "${env.REDMINE_BASE_URL}",
+                                          issueId: "${env.REDMINE_ISSUE_ID}",
+                                          statusId: '4' // Thay bằng ID thực tế của "Feedback"
+                } else {
+                    echo 'Không có REDMINE_ISSUE_ID để cập nhật trạng thái Feedback.'
+                }
+            }
         }
     }
-    //test commit Jenkins 1
-    //test commit Jenkins 2 tự build, ko bấm Build now
-    //test commit Jenkins 3 tự build, ko bấm Build now
 }
