@@ -75,6 +75,7 @@ pipeline {
 
         failure {
             echo 'Test failed!'
+            //liên quan tới Email Notification trong Jenkins System
             mail to: 'nguyenducthanh14112003@gmail.com',
                  subject: 'Thông báo kết quả Build',
                  body: 'Rất tiếc! Build không thành công.'
