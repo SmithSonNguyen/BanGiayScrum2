@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        REDMINE_API_KEY = '8e208768af1531a000a38f6d070145e9c6f3b5af'
+        REDMINE_API_KEY = '8e208768af1531a000a38f6d070145e9c6f3b5af' //API access key Redmine của tester
         REDMINE_BASE_URL = 'http://localhost:8080' // Thay bằng URL Redmine Docker của bạn, cái mà bạn đã chạy = url localhost:8080 
         
     }
@@ -37,13 +37,6 @@ pipeline {
         stage('Run Tests') {
             steps {
                 bat 'npm test'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo 'Deploying application...'
-                // Các lệnh deploy của bạn.
             }
         }
     }
