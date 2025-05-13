@@ -49,7 +49,7 @@ pipeline {
         success {
             echo 'Build and test passed!'
             // Đọc commit đẻ thực hiện => webhook
-            mail to: '22110416@student.hcmute.edu.vn',
+            mail to: 'nguyenducthanh14112003@gmail.com',
                  subject: 'Thông báo kết quả Build',
                  body: 'Chúc mừng! Build thành công.'
 
@@ -75,7 +75,7 @@ pipeline {
 
         failure {
             echo 'Test failed!'
-            mail to: '22110416@student.hcmute.edu.vn',
+            mail to: 'nguyenducthanh14112003@gmail.com',
                  subject: 'Thông báo kết quả Build',
                  body: 'Rất tiếc! Build không thành công.'
 
@@ -102,3 +102,4 @@ pipeline {
 }
 //test commit 1
 // test commit 2
+//test commit 3
