@@ -1,0 +1,74 @@
+/* Navbar link styles */
+.nav-effect {
+    color: #343a40; /* Default text color */
+    position: relative;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover effect for navigation links */
+.nav-effect:hover {
+    color: #ee8080 !important; /* Highlight color */
+    transform: scale(1.1); /* Slight zoom-in effect */
+}
+
+/* Active link effect for "Home" and "Shop" */
+.nav-effect::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #ee8080;
+    transition: width 0.3s ease;
+    margin: 0 auto;
+}
+
+.nav-effect:hover::after {
+    width: 100%; /* Underline expands fully */
+}
+
+.cart-btn {
+    background-color: #ee8080; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 12px;
+    transition: all 0.3s ease;
+}
+
+.cart-btn:hover {
+    background-color: #eb6969; 
+    transform: scale(1.1); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+.cart-btn:active {
+    transform: scale(0.95); 
+    background-color: #be505f; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.cart-icon {
+    font-size: 0.8rem; 
+    margin-right: 0.5px; 
+    transition: transform 0.3s ease; 
+}
+/* Navbar responsiveness for smaller screens */
+@media (max-width: 767px) {
+    .navbar-light {
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-nav .nav-link {
+        padding: 12px 20px;
+    }
+
+    .navbar-toggler {
+        border-color: #ee8080;
+    }
+
+    .navbar-toggler-icon {
+        background-color: #ee8080;
+    }
+}
+

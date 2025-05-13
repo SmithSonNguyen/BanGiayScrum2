@@ -1,0 +1,65 @@
+.navbar .nav-link {
+    color: #000 !important;
+}
+
+section h5 {
+    font-weight: 500;
+}
+.section .skin-light {
+    color: #c56370;
+}
+.text-muted {
+    margin-top: 15px;
+}
+.categories .card-link-secondary {
+    transition: background-color 0.3s ease, color 0.3s ease; 
+}
+
+.categories  .card-link-secondary:hover {
+    color: #ee8080 !important; 
+    font-weight: bold; 
+    transform: scale(1.5); 
+}
+.categories  .card-link-secondary:active {
+    color: #c56370 !important; 
+    font-weight: bold; 
+}
+.mb-5 {
+    margin-bottom: 30px !important; 
+}
+.small, small {
+    font-size: 14px;
+    font-weight: 300; 
+}
+.mb-3, .my-3 {
+    margin: 10px !important;
+}
+.md-form.md-outline label {
+    font-size: 14px;
+}
+
+/* Hiệu ứng khi hover */
+.btn:hover {
+    transform: scale(1.1); /* Tăng kích thước khi hover */
+    cursor: pointer;
+}
+
+.pagination .page-item.active .page-link {
+    color:#0a0b0d;
+    background-color: #e1e3e6;
+}
+.pagination .page-item.active .page-link:hover {
+    background-color: #d6d9dd 
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #faf8f3
+}
+.md-form.md-outline input[type=text]:focus:not([readonly]) {
+    border-color: #ee8080 !important;
+    -webkit-box-shadow: inset 0 0 0 1px #ee8080 !important;
+    box-shadow: inset 0 0 0 1px #ee8080 !important;
+}
+.md-form .prefix.active,.md-form.md-outline input[type=text]:focus:not([readonly])+label{
+    color: #ee8080
+}

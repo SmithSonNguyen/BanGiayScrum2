@@ -1,0 +1,48 @@
+footer {
+    font-family: 'Roboto', sans-serif;
+}
+
+footer h5 {
+    font-size: 1.2rem;
+    color: #f8f9fa;
+}
+
+footer ul {
+    padding-left: 0;
+    list-style: none;
+}
+
+footer ul li a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer ul li a:hover {
+    color: #ffc107;
+}
+
+footer hr {
+    height: 2px;
+}
+
+footer .text-muted {
+    color: #adb5bd !important;
+}
+
+footer .text-warning {
+    color: #ffc107 !important;
+}
+
+footer a.text-warning:hover {
+    color: #fff;
+}
+
+footer .social-icons a {
+    font-size: 1.5rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+footer .social-icons a:hover {
+    transform: scale(1.1);
+    color: #ffc107;
+}
