@@ -48,7 +48,8 @@ pipeline {
 
         success {
             echo 'Build and test passed!'
-            // Đọc commit đẻ thực hiện => webhook
+            // Đọc commit đẻ thực hiện => ngrok, webhook 
+            // Bật ngrok trước => Edit lại webhook github
             mail to: 'nguyenducthanh14112003@gmail.com',
                  subject: 'Thông báo kết quả Build',
                  body: 'Chúc mừng! Build thành công.'
@@ -75,7 +76,9 @@ pipeline {
 
         failure {
             echo 'Test failed!'
-            //liên quan tới Email Notification trong Jenkins System
+            //liên quan tới Email Notification trong Jenkins System => Cấu hình Use Autehentication để Jenkins dùng mail đó gửi cho các mail khác
+            // pass là mật khẩu ứng dụng của gmail chứ không phải mật khẩu gmail
+            // điền vào: krmq rfhb ksrg pzhm
             mail to: 'nguyenducthanh14112003@gmail.com',
                  subject: 'Thông báo kết quả Build',
                  body: 'Rất tiếc! Build không thành công.'
