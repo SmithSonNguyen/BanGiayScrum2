@@ -1,0 +1,36 @@
+a.rounded-pill {
+    border-radius: 8px !important;
+}
+.rounded-pill{
+    border-radius: 0px !important;
+}
+.btn-outline-primary {
+    color: #ee8080  !important;
+    background-color: transparent !important;
+    border: 2px solid #ee8080  !important;
+}
+.btn-outline-primary:hover {
+    color: #c56370  !important;
+    background-color: #f2f2f2 !important;
+    border: 2px solid #c56370 !important;
+}
+.navbar .nav-link {
+    color: #000 !important; 
+}
+.navbar {
+    background-color: #f2f2f2  !important;
+}
+
+.bg-light {
+    background-color: #f2f2f2 !important;
+}
+.mb-5{
+    margin-top: 3rem !important;
+}
+.table-striped>tbody>tr:nth-of-type(odd) {
+    --bs-table-accent-bg: transparent !important;
+      background-color: transparent;
+}
+.btn-danger {
+    background-color: #ee8080  !important;
+}
