@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', url: 'https://github.com/SmithSonNguyen/BanGiayScrum2.git'
+                git branch: 'BGS-1-todo-1-thiết-kế-chức-nang-tinh-tiền-sản-phẩm', url: 'https://github.com/SmithSonNguyen/BanGiayScrum2.git'
                 script {
                     def commitMessage = bat(script: 'git log -1 --pretty="format:^%%s^%%n^%%b"', returnStdout: true).trim()
                     def issueIdMatcher = commitMessage =~ /#(\d+)/
@@ -108,3 +108,4 @@ pipeline {
 // test commit 2
 //test commit 3
 //test commit 4
+//test commit 6
